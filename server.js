@@ -15,7 +15,7 @@ const genreRoutes = require("./routes/genreRoutes");
 const app = express();
 app.use(
   cors({
-    origin: "https://book-recommendation-frontend-e4u6-nkvl3w954.vercel.app",
+    origin: "https://book-recommendation-frontend-e4u6-qtk6jlwsc.vercel.app",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
