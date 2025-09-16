@@ -13,14 +13,32 @@ const genreRoutes = require("./routes/genreRoutes");
 
 // Initialize the Express app
 const app = express();
+// app.use(
+//   cors({
+//     origin: "https://book-recommendation-frontend-e4u6-qtk6jlwsc.vercel.app",
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//     credentials: true,
+//   })
+// );
+const allowedOrigins = [
+  "https://book-recommendation-frontend-e4u6-qtk6jlwsc.vercel.app",
+  "https://book-recommendation-frontend-e4u6-qj3yps0u5.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://book-recommendation-frontend-e4u6-qtk6jlwsc.vercel.app",
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = "CORS policy: This origin is not allowed";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
-
 // Middleware to parse incoming JSON data
 app.use(express.json());
 
